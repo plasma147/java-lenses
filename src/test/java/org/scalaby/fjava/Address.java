@@ -1,10 +1,14 @@
 package org.scalaby.fjava; 
 
-/**
- * User: remeniuk
- */
+import static org.scalaby.fjava.Lenses.lens;
+
 public class Address {
 
+	public static Lens<Address, Integer> zipCodeLens = 
+    		lens(Address::getZipCode,
+            (address, zipcode) -> new Address(address.getStreet(), address.getCity(), address.getState(), zipcode));
+
+	
     private final String street;
     private final String city;
     private final String state;
@@ -16,7 +20,7 @@ public class Address {
         this.state = state;
         this.zipCode = zipCode;
     }
-
+    
     public String getStreet() {
         return street;
     }

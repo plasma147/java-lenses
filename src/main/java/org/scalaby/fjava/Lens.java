@@ -4,7 +4,6 @@ import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-
 /**
  * Implementation of a functional lens that allows you to modify hierarchies of immutable objects in an immutable manner.
  * User: remeniuk
@@ -15,7 +14,6 @@ public class Lens<A, B> implements Function<A, B> {
     public BiFunction<A, B, A> fset;
 
     public Lens() {
-
     }
 
     public Lens(Function<A, B> fget, BiFunction<A, B, A> fset) {
@@ -45,23 +43,9 @@ public class Lens<A, B> implements Function<A, B> {
     }
 
     public <C> Lens<C, B> compose(final Lens<C, A> that) {
-        return new Lens<C, B>(new Function<C, B>() {
-            @Override
-            public B apply(C c) {
-                return get(that.apply(c));
-            }
-        }, new BiFunction<C, B, C>() {
-            @Override
-            public C apply(C c, final B b) {
-                return that.mod(c, new Function<A, A>() {
-                    @Override
-                    public A apply(A a) {
-                        return set(a, b);
-                    }
-                });
-            }
-        }
-        );
+        return new Lens<C, B>(
+        		c -> get(that.apply(c)),
+        		(c, b) -> that.mod(c, a -> set(a, b)));
     }
 
     public <C> Lens<A, C> andThen(Lens<B, C> that) {
@@ -72,5 +56,4 @@ public class Lens<A, B> implements Function<A, B> {
     public boolean equals(Object o) {
         return Objects.equals(this, o);
     }
-
 }
