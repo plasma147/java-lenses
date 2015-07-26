@@ -1,3 +1,4 @@
+package org.scalaby.fjava;
 /**
  * User: remeniuk
  */
@@ -24,4 +25,12 @@ public class Person {
     public Address getAddress() {
         return address;
     }
+
+	@Override
+	public String toString() {
+		return "Person [firstName=" + firstName + ", lastName=" + lastName
+				+ ", address=" + address + "]";
+	}
+    
+    
 }

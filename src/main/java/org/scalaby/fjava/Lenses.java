@@ -1,6 +1,6 @@
 package org.scalaby.fjava;
 
-import com.google.common.base.Function;
+import java.util.function.Function;
 
 /**
  * User: remeniuk

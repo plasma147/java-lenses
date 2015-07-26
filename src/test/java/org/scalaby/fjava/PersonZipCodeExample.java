@@ -1,10 +1,7 @@
-import com.google.common.base.Function;
-import org.scalaby.fjava.Function2;
-import org.scalaby.fjava.Lens;
+package org.scalaby.fjava;
+import static org.scalaby.fjava.Lenses.lens;
 
-import javax.annotation.Nullable;
-
-import static org.scalaby.fjava.Lenses.*;
+import java.util.function.Function;
 
 /**
  * User: remeniuk
@@ -16,7 +13,7 @@ public class PersonZipCodeExample {
         // you can create a lens overriding set/get methods
         Lens<Person, Address> personAddressLens = new Lens<Person, Address>() {
             @Override
-            public Address get(@Nullable Person person) {
+            public Address get(Person person) {
                 return person.getAddress();
             }
 
@@ -30,7 +27,7 @@ public class PersonZipCodeExample {
         Lens<Address, Integer> addressZipCodeLens = lens(
                 new Function<Address, Integer>() {
                     @Override
-                    public Integer apply(@Nullable Address address) {
+                    public Integer apply(Address address) {
                         return address.getZipCode();
                     }
                 },
@@ -46,8 +43,9 @@ public class PersonZipCodeExample {
 
         Lens<Person, Integer> personZipCodeLens = personAddressLens.andThen(addressZipCodeLens);
 
-        personZipCodeLens.set(person, personZipCodeLens.get(person) + 1);
-
+        Person person2 = personZipCodeLens.set(person, personZipCodeLens.get(person) + 1);
+        
+        System.out.println(person2);
     }
 
 }

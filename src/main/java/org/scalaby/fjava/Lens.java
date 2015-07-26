@@ -1,9 +1,8 @@
 package org.scalaby.fjava;
 
-import com.google.common.base.Function;
-import com.google.common.base.Objects;
+import java.util.Objects;
+import java.util.function.Function;
 
-import javax.annotation.Nullable;
 
 /**
  * Implementation of a functional lens that allows you to modify hierarchies of immutable objects in an immutable manner.
@@ -32,7 +31,7 @@ public class Lens<A, B> implements Function<A, B> {
     }
 
     @Override
-    public B apply(@Nullable A a) {
+    public B apply(A a) {
         return get(a);
     }
 
@@ -47,7 +46,7 @@ public class Lens<A, B> implements Function<A, B> {
     public <C> Lens<C, B> compose(final Lens<C, A> that) {
         return new Lens<C, B>(new Function<C, B>() {
             @Override
-            public B apply(@Nullable C c) {
+            public B apply(C c) {
                 return get(that.apply(c));
             }
         }, new Function2<C, B, C>() {
@@ -55,7 +54,7 @@ public class Lens<A, B> implements Function<A, B> {
             public C apply(C c, final B b) {
                 return that.mod(c, new Function<A, A>() {
                     @Override
-                    public A apply(@Nullable A a) {
+                    public A apply(A a) {
                         return set(a, b);
                     }
                 });
@@ -69,8 +68,8 @@ public class Lens<A, B> implements Function<A, B> {
     }
 
     @Override
-    public boolean equals(@Nullable Object o) {
-        return Objects.equal(this, o);
+    public boolean equals(Object o) {
+        return Objects.equals(this, o);
     }
 
 }

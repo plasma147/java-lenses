@@ -1,3 +1,5 @@
+package org.scalaby.fjava; 
+
 /**
  * User: remeniuk
  */
@@ -31,4 +33,11 @@ public class Address {
         return zipCode;
     }
 
+	@Override
+	public String toString() {
+		return "Address [street=" + street + ", city=" + city + ", state="
+				+ state + ", zipCode=" + zipCode + "]";
+	}
+
+    
 }
