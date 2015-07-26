@@ -9,7 +9,7 @@ In some cases, however, lenses can still be useful. E.g., when you want to trans
 
 #####################################################
 
-Updated for java 8: 
+Updated for java 8 and extending the example: 
 
 
 ```java
