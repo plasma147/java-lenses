@@ -1,6 +1,7 @@
 package org.scalaby.fjava;
 import static org.scalaby.fjava.Lenses.lens;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 /**
@@ -31,7 +32,7 @@ public class PersonZipCodeExample {
                         return address.getZipCode();
                     }
                 },
-                new Function2<Address, Integer, Address>() {
+                new BiFunction<Address, Integer, Address>() {
                     @Override
                     public Address apply(Address address, Integer zipCode) {
                         return new Address(address.getStreet(), address.getCity(), address.getState(), zipCode);

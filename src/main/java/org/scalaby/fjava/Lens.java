@@ -1,6 +1,7 @@
 package org.scalaby.fjava;
 
 import java.util.Objects;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 
@@ -11,13 +12,13 @@ import java.util.function.Function;
 public class Lens<A, B> implements Function<A, B> {
 
     public Function<A, B> fget;
-    public Function2<A, B, A> fset;
+    public BiFunction<A, B, A> fset;
 
     public Lens() {
 
     }
 
-    public Lens(Function<A, B> fget, Function2<A, B, A> fset) {
+    public Lens(Function<A, B> fget, BiFunction<A, B, A> fset) {
         this.fget = fget;
         this.fset = fset;
     }
@@ -49,7 +50,7 @@ public class Lens<A, B> implements Function<A, B> {
             public B apply(C c) {
                 return get(that.apply(c));
             }
-        }, new Function2<C, B, C>() {
+        }, new BiFunction<C, B, C>() {
             @Override
             public C apply(C c, final B b) {
                 return that.mod(c, new Function<A, A>() {
