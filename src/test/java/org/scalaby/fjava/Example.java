@@ -3,7 +3,7 @@ import static org.scalaby.fjava.Company.company;
 import static org.scalaby.fjava.Department.department;
 import static org.scalaby.fjava.Person.person;
 
-import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 public class Example {
 
@@ -27,8 +27,8 @@ public class Example {
     				.andThen(Person.addressLens
     				.andThen(Address.zipCodeLens)));
     	
-    	Function<Company, Company> correctKellysZipCode = c -> kellysZipCodeLens.set(c, kellysZipCodeLens.get(c) + 1);
-       	Function<Company, Company> correctJanesName= c -> janesFirstNameLens.set(c, "Janet");
+    	UnaryOperator<Company> correctKellysZipCode = c -> kellysZipCodeLens.set(c, kellysZipCodeLens.get(c) + 1);
+    	UnaryOperator<Company> correctJanesName= c -> janesFirstNameLens.set(c, "Janet");
            
         System.out.println(correctJanesName.andThen(correctKellysZipCode).apply(company));
     }

@@ -9,8 +9,7 @@ In some cases, however, lenses can still be useful. E.g., when you want to trans
 
 #####################################################
 
-Updated for java 8 and extending the example: 
-
+#### Updated for java 8 and extending the example:  
 
 ```java
 Company company = company("hoopinc", 
@@ -31,8 +30,8 @@ Lens<Company, Integer> kellysZipCodeLens =
 			.andThen(Person.addressLens
 			.andThen(Address.zipCodeLens)));
 
-Function<Company, Company> correctKellysZipCode = c -> kellysZipCodeLens.set(c, kellysZipCodeLens.get(c) + 1);
-Function<Company, Company> correctJanesName= c -> janesFirstNameLens.set(c, "Janet");
+UnaryOperator<Company> correctKellysZipCode = c -> kellysZipCodeLens.set(c, kellysZipCodeLens.get(c) + 1);
+UnaryOperator<Company> correctJanesName= c -> janesFirstNameLens.set(c, "Janet");
    
 System.out.println(correctJanesName.andThen(correctKellysZipCode).apply(company));
 
