@@ -15,13 +15,14 @@ public class Company {
 	}
 	
 	public static Lens<Company, Department> departmentWithNameLens(String name) {
-		return lens(departmentWithName(name),            
-    		(company, department)  -> {
-    			List<Department> departments = company.getDepartments()
-    					.stream().map(d -> 
+		return lens(
+				departmentWithName(name),            
+				(company, department)  -> {
+					List<Department> departments = company.getDepartments()
+						.stream().map(d -> 
     					  d.getName().equals(department.getName()) ? department : d).collect(toList()); 
-    			return company(company.getName(), departments.toArray(new Department[departments.size()]));
-    		});
+					return company(company.getName(), departments.toArray(new Department[departments.size()]));
+				});
 	}
 	
     private final String name;

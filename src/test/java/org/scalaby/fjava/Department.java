@@ -15,7 +15,8 @@ public class Department {
 	}
 	
 	public static Lens<Department, Person> employeeWithEmailLens(String email) {
-	    return lens(employeeWithEmail(email),            
+	    return lens(
+	    		employeeWithEmail(email),            
 	    		(department, person)  -> {
 	    			List<Person> employees = department.getEmployees()
 	    					.stream().map(p -> 
